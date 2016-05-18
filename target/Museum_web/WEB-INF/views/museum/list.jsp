@@ -11,6 +11,7 @@
 </head>
 <body>
     <div class="container col-xs-10">
+        <label>Museu</label>
 	<table id="tbField" class="table tablesorter table-striped sortable table-hover">
             <thead>
                 <tr> 
