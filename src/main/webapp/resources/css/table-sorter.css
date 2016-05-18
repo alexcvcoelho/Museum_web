@@ -1,0 +1,42 @@
+table td[title="Pedido"] { text-align:center }	
+table td[title="Horas"] { text-align:center }
+table th[title="Acoes"] { background-color: #4f95b4; color:#fff }	
+table th[title="Acoes"]:hover { background-color: #4f95b4!important }
+
+
+table.tablesorter thead tr .header {
+    color:#fff;
+    background-color: #4f95b4;
+    background-repeat: no-repeat;
+    background-position: center right;
+    cursor: pointer
+}
+
+table.tablesorter thead tr th { border-right:#fff solid thin }
+
+table.tablesorter thead tr th:hover {color:#fff; background-color:#1a7496}
+
+
+table.tablesorter thead tr .headerSortUp {
+    background-image: url(../img/asc.gif);
+}
+table.tablesorter thead tr .headerSortDown {
+    background-image: url(../img/desc.gif);
+}
+table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSortUp {
+    background-color: #8dc63f; color:#FFF}
+
+table.tablesorter thead tr .headerSortDown:hover, table.tablesorter thead tr .headerSortUp:hover {
+    background-color: #6ea029; color:#FFF}
+
+
+/* Filter */
+
+.filter {background:#CCC}
+.filter td  {padding-bottom:0; margin:0; position:relative;}
+.filter .filter-action {display:block}
+.filter td input {width:100%; height:30px; margin-bottom:5px;
+                  box-sizing: border-box;
+                  -moz-box-sizing: border-box;
+                  -webkit-box-sizing: border-box;}
+.filter i {float:right; top:15px; right:12px; position:absolute; cursor:pointer}
