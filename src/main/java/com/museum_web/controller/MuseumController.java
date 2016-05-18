@@ -25,5 +25,7 @@ public class MuseumController {
 		mv.addObject("list", mus);
 		return mv;
 	}
+        
+    
     
 }
