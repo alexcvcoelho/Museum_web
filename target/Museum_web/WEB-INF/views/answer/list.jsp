@@ -21,7 +21,7 @@
             <div class="panel">
                 <h3>
                     Answer 
-                    <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalTheme">
+                    <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalAnswer">
                         <span class="glyphicon glyphicon-plus"></span>
                     </button>
                     <hr>
@@ -54,7 +54,7 @@
         <div class="col-lg-1"></div>
         
         <!--Start Modal-->
-        <div id="modalTheme" class="modal fade in">
+        <div id="modalAnswer" class="modal fade in">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <form action="actions/SaveAnswer" method="POST">

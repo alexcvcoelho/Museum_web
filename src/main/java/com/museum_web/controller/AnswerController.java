@@ -26,7 +26,7 @@ public class AnswerController {
 	}
         
     @RequestMapping("actions/SaveAnswer")
-    public ModelAndView saveTheme(Answer answer, HttpServletRequest request) throws Exception {
+    public ModelAndView saveAnswer(Answer answer, HttpServletRequest request) throws Exception {
         if(answer.getId() == 0)
             answer.setId(null);
         new AnswerService().createAnswer(answer);
