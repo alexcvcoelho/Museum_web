@@ -8,7 +8,7 @@ package com.museum_web.controller;
 import com.lpsmuseum.dto.Museum;
 import com.lpsmuseum.service.MuseumService;
 import java.util.ArrayList;
-import javax.swing.text.View;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -31,6 +31,19 @@ public class MuseumController {
     @RequestMapping("museum/create")
     public ModelAndView create() {
         ModelAndView mv = new ModelAndView("museum/create");
+        return mv;
+    }
+    
+     @RequestMapping("actions/SaveMuseum")
+    public ModelAndView saveTheme(Museum museum, HttpServletRequest request) throws Exception {
+        ModelAndView mv = new ModelAndView("museum/list");
+        if(museum.getId()==0){
+            museum.setId(null);
+            new MuseumService().createMuseum(museum);
+        }
+        else{
+            new MuseumService().editMuseum(museum);
+        }         
         return mv;
     }
 

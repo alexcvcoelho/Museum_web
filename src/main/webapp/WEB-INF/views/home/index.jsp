@@ -26,10 +26,11 @@
                     <a class="list-group-item" href="answer">Answer</a>
                 </div>
             </div>
-            <script src="resources/js/jquery-min.js"></script>
-            <script src="resources/js/jquery.tablesorter.min.js"></script>
-            <script src="resources/js/jquery.tablesorter.pager.js"></script>
-            <script src="resources/js/bootstrap.js"></script>
+        </div>
+        <script src="resources/js/jquery-min.js"></script>
+        <script src="resources/js/jquery.tablesorter.min.js"></script>
+        <script src="resources/js/jquery.tablesorter.pager.js"></script>
+        <script src="resources/js/bootstrap.js"></script>
     </body>
 </html>
 
