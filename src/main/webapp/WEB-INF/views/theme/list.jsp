@@ -5,12 +5,13 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html ng-app>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Museu WEB</title>
-         <link href="resources/css/bootstrap.min.css" rel="stylesheet"> 
+        <link href="resources/css/bootstrap.min.css" rel="stylesheet"> 
         <link href="resources/css/table-sorter.css" rel="stylesheet"> 
         <link href="resources/css/tablesorter.pager.css" rel="stylesheet">  
         <link href="resources/css/dataTables.bootstrap.css" rel="stylesheet"> 
@@ -40,9 +41,9 @@
                                 <td>${theme.title}</td>
                                 <td>${theme.description}</td>                                                         
                                 <td>
-                                    <button type="button" class="btn btn-primary btn-sm">
-                                        <span class="glyphicon glyphicon-edit"></span></button>
-                                    <button type="button" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span></button>
+                                    <button type="button" class="btn btn-primary btn-sm"  href="#" onclick="alterar('${theme.id}', '${theme.title}', '${theme.description}');">
+                                        <span class="glyphicon glyphicon-edit" ></span></button>
+                                        <button type="button" class="btn btn-danger btn-sm" href="#" onclick="Delete('${theme.id}')"><span class="glyphicon glyphicon-trash"></span></button>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -64,18 +65,14 @@
                             </h4>                    
                         </div>
                         <div class="modal-body">
-                            <input type="hidden" name="id" id="input-id" value="0"/>
-
-                            <label>Título</label>
+                            <input type="hidden" name="id" id="id" value="0"/>                            <label>Título</label>
                             <div class="form-group-sm">
-                                <input class="form-control " placeholder="Título" required="true" type="text" name="title"  maxlength="80"/>                                        
-                            </div>	
-
+                                <input class="form-control " placeholder="Título" required="true" type="text" id="title" name="title"  maxlength="80"/>                                        
+                            </div>
                             <label>Descrição</label>
                             <div class="form-group-sm">
-                                <input class="span5 form-control " placeholder="Descrição" type="text" name="description" />                                        
-                            </div>                           	
-
+                                <input class="span5 form-control " placeholder="Descrição" type="text" id="description" name="description" />                                        
+                            </div> 
                         </div>
                         <div class="modal-footer">
                             <div class="btn-group">
@@ -92,6 +89,20 @@
     <script src="resources/js/jquery.tablesorter.min.js"></script>
     <script src="resources/js/jquery.tablesorter.pager.js"></script>
     <script src="resources/js/bootstrap.js"></script>
+    <script type="text/javascript">    
+    function alterar(id, title, description) 
+    {
+        $('#id').val(id);
+        $('#title').val(title);
+        $('#description').val(description);
+        $('#modalTheme').modal('show');
+    };
+                        
+    function Delete(id)
+    {
+      window.location.href = "actions/deleteTheme?id=" + id;
+    }
+    </script>
     
     </body>
 </html>

@@ -37,19 +37,30 @@ public class ThemeController {
      *
      */
     @RequestMapping("theme")
-	public ModelAndView  list(){
-            List<Theme> listTheme = service.listThemes();
-            ModelAndView mv = new ModelAndView("theme/list"); 
-            mv.addObject("listTheme", listTheme);
-            return mv;            
-	}
+    public ModelAndView  list(){
+        List<Theme> listTheme = service.listThemes();
+        ModelAndView mv = new ModelAndView("theme/list"); 
+        mv.addObject("listTheme", listTheme);
+        return mv;            
+    }
         
     @RequestMapping("actions/SaveTheme")
     public ModelAndView saveTheme(Theme theme, HttpServletRequest request) throws Exception {
-        if(theme.getId()==0)
-        theme.setId(null);
-        new ThemeService().createTheme(theme);
-        ModelAndView mv = new ModelAndView("theme/list");        
+        ModelAndView mv = new ModelAndView("theme/list");
+        if(theme.getId()==0){
+            theme.setId(null);
+            new ThemeService().createTheme(theme);
+        }
+        else{
+            new ThemeService().editTheme(theme);
+        }         
+        return mv;
+    }
+    
+    @RequestMapping("actions/deleteTheme")
+    public ModelAndView deleteTheme(Theme theme) throws Exception{
+        ModelAndView mv = new ModelAndView("theme/list");
+        new ThemeService().deleteTheme(theme);
         return mv;
     }
     
