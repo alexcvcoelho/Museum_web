@@ -1,16 +1,12 @@
 <%-- 
     Document   : list
-    Created on : 18/05/2016, 16:04:59
-    Author     : Amanda
+    Created on : May 19, 2016, 5:27:15 PM
+    Author     : filip_000
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<<<<<<< HEAD
-<html ng-app>
-=======
 <html>
->>>>>>> b1966c544e1041e8534c7d8eab62c545089afae6
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Museu WEB</title>
@@ -24,36 +20,26 @@
         <div class="col-lg-10 div-branca">
             <div class="panel">
                 <h3>
-                    Tema 
-                    <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalTheme">
+                    Answer 
+                    <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalAnswer">
                         <span class="glyphicon glyphicon-plus"></span>
                     </button>
                     <hr>
                 </h3>
-<<<<<<< HEAD
-=======
 
->>>>>>> b1966c544e1041e8534c7d8eab62c545089afae6
                 <table class="table tablesorter table-striped sortable table-hover">
                     <thead>
                         <tr>
-                            <th class="header">Título</th>
+                            <th class="header">Correto</th>
                             <th class="header">Descrição</th>                           
                             <th class="header" id="td-acoes">Ações</th>
                         </tr>
                     </thead>
                     <tbody>
-<<<<<<< HEAD
-                        <c:forEach var="theme" items="${listTheme}">
-                            <tr>
-                                <td>${theme.title}</td>
-                                <td>${theme.description}</td>                                                         
-=======
                         <c:forEach var="cliente" items="">
                             <tr>
                                 <td></td>
                                 <td></td>                                                         
->>>>>>> b1966c544e1041e8534c7d8eab62c545089afae6
                                 <td>
                                     <button type="button" class="btn btn-primary btn-sm">
                                         <span class="glyphicon glyphicon-edit"></span></button>
@@ -68,27 +54,29 @@
         <div class="col-lg-1"></div>
         
         <!--Start Modal-->
-        <div id="modalTheme" class="modal fade in">
+        <div id="modalAnswer" class="modal fade in">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form action="actions/SaveTheme" method="POST">
+                    <form action="actions/SaveAnswer" method="POST">
                         <div class="modal-header">
                             <button type="reset" class="close" data-dismiss="modal" aria-hidden="true">×</button> 
                             <h4>
-                                <label>Tema</label>
+                                <label>Answer</label>
                             </h4>                    
                         </div>
                         <div class="modal-body">
                             <input type="hidden" name="id" id="input-id" value="0"/>
 
-                            <label>Título</label>
+                            <label>Correto</label>
                             <div class="form-group-sm">
-                                <input class="form-control " placeholder="Título" required="true" type="text" name="title"  maxlength="80"/>                                        
+                                <input class="span5 form-control " placeholder="false" type="checkbox" name="description" />                                         
                             </div>	
 
                             <label>Descrição</label>
                             <div class="form-group-sm">
-                                <input class="span5 form-control " placeholder="Descrição" type="text" name="description" />                                        
+                                <input class="span5 form-control " placeholder="Descrição" type="text" name="description" />   
+                                 
+                                
                             </div>                           	
 
                         </div>
@@ -107,9 +95,5 @@
     <script src="resources/js/jquery.tablesorter.min.js"></script>
     <script src="resources/js/jquery.tablesorter.pager.js"></script>
     <script src="resources/js/bootstrap.js"></script>
-<<<<<<< HEAD
-    
-=======
->>>>>>> b1966c544e1041e8534c7d8eab62c545089afae6
     </body>
 </html>
