@@ -6,7 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html ng-app>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Museu WEB</title>
@@ -26,7 +26,6 @@
                     </button>
                     <hr>
                 </h3>
-
                 <table class="table tablesorter table-striped sortable table-hover">
                     <thead>
                         <tr>
@@ -36,10 +35,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach var="cliente" items="">
+                        <c:forEach var="theme" items="${listTheme}">
                             <tr>
-                                <td></td>
-                                <td></td>                                                         
+                                <td>${theme.title}</td>
+                                <td>${theme.description}</td>                                                         
                                 <td>
                                     <button type="button" class="btn btn-primary btn-sm">
                                         <span class="glyphicon glyphicon-edit"></span></button>
@@ -93,5 +92,6 @@
     <script src="resources/js/jquery.tablesorter.min.js"></script>
     <script src="resources/js/jquery.tablesorter.pager.js"></script>
     <script src="resources/js/bootstrap.js"></script>
+    
     </body>
 </html>
