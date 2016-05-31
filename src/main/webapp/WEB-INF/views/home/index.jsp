@@ -16,7 +16,8 @@
         <link href="resources/css/dataTables.bootstrap.css" rel="stylesheet"> 
     </head>
     <body>
-        <div class="container-fluid">              
+        <div class="container-fluid"> 
+            <h2>Museu Virtual</h2>
             <div class="col-lg-4 div-branca">
                 <div class="list-group">
                     <div class="list-group-item active">Controllers</div>
