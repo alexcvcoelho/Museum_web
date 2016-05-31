@@ -19,7 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 public class ThemeController {
-     @RequestMapping("theme")
+    @RequestMapping("theme")
 	public ModelAndView list() {
 		ModelAndView mv = new ModelAndView("theme/list");		
 		return mv;
