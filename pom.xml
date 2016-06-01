@@ -56,7 +56,8 @@
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
-            <version>20160212</version>
+            <version>20140107</version>
+            <type>jar</type>
         </dependency>
         <dependency>
             <groupId>org.webjars</groupId>
