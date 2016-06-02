@@ -7,10 +7,14 @@ package com.museum_web.controller;
 
 import com.lpsmuseum.dto.scenario.Answer;
 import com.lpsmuseum.service.AnswerService;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
 
 /**
  *
@@ -19,22 +23,52 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class AnswerController {
     
+    List<Answer> lista = new ArrayList<Answer>();
+    
+    
+    
     @RequestMapping("answer")
 	public ModelAndView list() {
-		ModelAndView mv = new ModelAndView("answer/list");		
+            
+		
+                lista = new AnswerService().listAnswers();
+		ModelAndView mv = new ModelAndView("answer/list");
+                mv.addObject("lista", lista);
+                mv.addObject("answer", new Answer());
 		return mv;
 	}
         
+      
+        
     @RequestMapping("actions/SaveAnswer")
     public ModelAndView saveAnswer(Answer answer, HttpServletRequest request) throws Exception {
+        
+        ModelAndView mv = new ModelAndView("redirect:../answer");
+        
+        if(answer.isCorrect() == null)
+            answer.setCorrect(false);
         if(answer.getId() == 0)
+        {
             answer.setId(null);
-        new AnswerService().createAnswer(answer);
+            new AnswerService().createAnswer(answer);
+        }
+        else
+            new AnswerService().editAnswer(answer);
         
-        
-        ModelAndView mv = new ModelAndView("answer/list");
         return mv;
+
     }
     
+    
+    @RequestMapping("actions/DeleteAnswer/{id}")
+    public ModelAndView deleteAnswer(@PathVariable("id") Long id, HttpServletRequest request) throws Exception {
+ 
+        ModelAndView mv = new ModelAndView("redirect:../../answer");
+        
+        new AnswerService().deleteAnswer(id);
+        
+        return mv;
+
+    }
 }
 
