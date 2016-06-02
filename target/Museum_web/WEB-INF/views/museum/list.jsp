@@ -27,21 +27,22 @@
                             <th class="header">Id</th>
                             <th class="header">Name</th>
                             <th class="header">Scenarios</th>
-                            <th class="header">Delete</th>
-                            <th class="header">Edit</th>
+                            <th class="header">Ações</th>
                         </tr>
                     </thead>
                     <tbody>
                         <c:forEach items="${list}" var="museum">
                             <tr>
-                                <td><a href="museum/edit?id=${museum.getId()}">${museum.getId()}</a></td>
+                                <td>${museum.getId()}</td>
                                 <td>${museum.getName()}</td>
                                 <td><c:forEach items="${museum.getScenarios()}" var="sce">
                                         ${sce.getId()} - ${sce.getName()}
                                         <br />
                                     </c:forEach></td>
-                                <td><a href="museum/delete?id=${museum.getId()}">Delete</a></td>
-                                <td><a href="museum/edit?id=${museum.getId()}">Edit</a></td>
+                                <td>
+                                    <a href="#" onclick="alterar('${museum.getId()}','${museum.getName()}')" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-edit"></i></a>
+                                    <a href="actions/deleteMuseum?id=${museum.getId()}" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i></a>
+                                </td>
                             </tr>
                         </c:forEach>
                     </tbody>
@@ -61,10 +62,10 @@
                             </h4>                    
                         </div>
                         <div class="modal-body">
-                            <input type="hidden" name="id" id="input-id" value="0"/>                                                     	
+                            <input type="hidden" name="id" id="id" value="0"/>                                                     	
                             <div class="form-group">
                                 <label>Nome</label>
-                                <input type="text" class="form-control" name="name" placeholder="Nome do museu"/>
+                                <input type="text" class="form-control" name="name" id="name" placeholder="Nome do museu"/>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -82,4 +83,13 @@
         <script src="resources/js/jquery.tablesorter.min.js"></script>
         <script src="resources/js/jquery.tablesorter.pager.js"></script>
         <script src="resources/js/bootstrap.js"></script>
+        <script type="text/javascript">
+            function alterar(id, name)
+            {
+                $('#id').val(id);
+                $('#name').val(name);
+                $('#modalMuseum').modal('show');
+            }
+            ;
+        </script>
     </body>
