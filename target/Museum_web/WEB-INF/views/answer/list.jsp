@@ -121,6 +121,7 @@
     $('.modal').on('hidden.bs.modal', function(){
         $(this).find('form')[0].reset();
         $('#correct').attr('checked',false);
+        $('#id').val(0);
     });
     </script>
     
