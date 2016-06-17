@@ -32,7 +32,8 @@
                         <tr>
                             <th class="header">Id</th>  
                             <th class="header">Nome</th>
-                            <th class="header">Data</th>                            
+                            <th class="header">Data</th>
+                            <th class="header">Tipo</th>
                             <th class="header" id="td-acoes">Ações</th>
                         </tr>
                     </thead>
@@ -42,6 +43,7 @@
                                 <td>${item.id}</td>
                                 <td>${item.name}</td>
                                 <td>${sdf.format(item.date.getTime())}</td>
+                                <td>${item.objectType ? 'Texto':'Imagem'}</td>
                                 <td>
                                     <button type="button" class="btn btn-primary btn-sm"  href="#" onclick="alterar('${item.id}', '${item.name}', '${sdf.format(item.date.getTime())}');">
                                         <span class="glyphicon glyphicon-edit" ></span></button>
@@ -74,8 +76,16 @@
                             </div>
                             <label>Data</label>
                             <div class="form-group-sm">
-                                <input class="span5 form-control " placeholder="Data" type="text" id="date" name="dateText" />                                        
+                                <input class="span5 form-control " required="true" placeholder="Data" type="text" id="date" name="dateText" />                                        
                             </div> 
+                            <label>Tipo</label>
+                            <div class="form-group-sm">
+                                <label><input type="radio" name="objectType" value="0" class="type" checked=""/> Imagem</label>
+                                <label><input type="radio" name="objectType" value="1" class="type"/> Texto</label>
+                            </div> 
+                            <div id="divtype" class="form-group-sm">
+                                <input class='form-control' type='text' placeholder='URL' name='urlAddress' />
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <div class="btn-group">
@@ -93,14 +103,23 @@
         <script src="resources/js/jquery.tablesorter.pager.js"></script>
         <script src="resources/js/bootstrap.js"></script>
         <script type="text/javascript">
-                                                function alterar(id, name, date)
-                                                {
-                                                    $('#id').val(id);
-                                                    $('#name').val(name);
-                                                    $('#date').val(date);
-                                                    $('#modal').modal('show');
+                                        function alterar(id, name, date)
+                                        {
+                                            $('#id').val(id);
+                                            $('#name').val(name);
+                                            $('#date').val(date);
+                                            $('#modal').modal('show');
+                                        }
+                                        ;
+                                        $(document).ready(function () {
+                                            $('.type').change(function () {
+                                                if ($(this).val() === '0') {
+                                                    $('#divtype').html("<input class='form-control' type='text' placeholder='URL' name='urlAddress' />");
+                                                }else{
+                                                     $('#divtype').html("<textarea class='form-control' name='text' placeholder='Texto'></textarea>");
                                                 }
-                                                ;
+                                            });
+                                        });
         </script>
 
     </body>
