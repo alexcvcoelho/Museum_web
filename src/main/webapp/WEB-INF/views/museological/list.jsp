@@ -45,7 +45,7 @@
                                 <td>${sdf.format(item.date.getTime())}</td>
                                 <td>${item.objectType ? 'Texto':'Imagem'}</td>
                                 <td>
-                                    <button type="button" class="btn btn-primary btn-sm"  href="#" onclick="alterar('${item.id}', '${item.name}', '${sdf.format(item.date.getTime())}');">
+                                    <button type="button" class="btn btn-primary btn-sm"  href="#" onclick="alterar('${item.id}', '${item.name}', '${sdf.format(item.date.getTime())}', '${item.objectType}');">
                                         <span class="glyphicon glyphicon-edit" ></span></button>
                                     <a type="button" class="btn btn-danger btn-sm" href="actions/deleteMuseological?id=${item.id}"><span class="glyphicon glyphicon-trash"></span></a>
                                 </td>
@@ -80,8 +80,8 @@
                             </div> 
                             <label>Tipo</label>
                             <div class="form-group-sm">
-                                <label><input type="radio" name="objectType" value="0" class="type" checked=""/> Imagem</label>
-                                <label><input type="radio" name="objectType" value="1" class="type"/> Texto</label>
+                                <label><input id="img" type="radio" name="objectType" value="0" class="type" checked="" onclick="imagem()"/> Imagem</label>
+                                <label><input id='txt' type="radio" name="objectType" value="1" class="type" onclick="texto()"/> Texto</label>
                             </div> 
                             <div id="divtype" class="form-group-sm">
                                 <input class='form-control' type='text' placeholder='URL' name='urlAddress' />
@@ -103,23 +103,28 @@
         <script src="resources/js/jquery.tablesorter.pager.js"></script>
         <script src="resources/js/bootstrap.js"></script>
         <script type="text/javascript">
-                                        function alterar(id, name, date)
-                                        {
-                                            $('#id').val(id);
-                                            $('#name').val(name);
-                                            $('#date').val(date);
-                                            $('#modal').modal('show');
+                                    function alterar(id, name, date, type)
+                                    {
+                                        $('#id').val(id);
+                                        $('#name').val(name);
+                                        $('#date').val(date);
+                                        if (type === "true") {
+                                            $('#txt').prop('checked', true);
+                                            texto();
+                                        } else {
+                                            $('#img').prop('checked', true);
+                                            imagem();
                                         }
-                                        ;
-                                        $(document).ready(function () {
-                                            $('.type').change(function () {
-                                                if ($(this).val() === '0') {
-                                                    $('#divtype').html("<input class='form-control' type='text' placeholder='URL' name='urlAddress' />");
-                                                }else{
-                                                     $('#divtype').html("<textarea class='form-control' name='text' placeholder='Texto'></textarea>");
-                                                }
-                                            });
-                                        });
+                                        $('#modal').modal('show');
+                                    }
+                                    ;
+                                    function imagem() {
+                                        $('#divtype').html("<input class='form-control' type='text' placeholder='URL' name='urlAddress' />");
+                                    };
+                                    function texto() {
+                                        $('#divtype').html("<textarea class='form-control' name='text' placeholder='Texto'></textarea>");
+                                    };
+
         </script>
 
     </body>
