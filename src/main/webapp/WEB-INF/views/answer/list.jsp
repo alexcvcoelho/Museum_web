@@ -9,12 +9,13 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Museu WEB</title>
-         <link href="resources/css/bootstrap.min.css" rel="stylesheet"> 
+        <title>Museu WEB - Answer</title>
+        <link href="resources/css/bootstrap.min.css" rel="stylesheet"> 
         <link href="resources/css/table-sorter.css" rel="stylesheet"> 
         <link href="resources/css/tablesorter.pager.css" rel="stylesheet">  
         <link href="resources/css/dataTables.bootstrap.css" rel="stylesheet"> 
         <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+       
     </head>
     <body>
         <div class="col-lg-1"></div>
@@ -22,9 +23,9 @@
             <div class="panel">
                 <h3>
                     Answer 
-                    <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalAnswer">
+                    <a type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalAnswer">
                         <span class="glyphicon glyphicon-plus"></span>
-                    </button>
+                    </a>
                     <hr>
                 </h3>
                
@@ -32,6 +33,7 @@
                 <table class="table tablesorter table-striped sortable table-hover">
                     <thead>
                         <tr>
+                            <th class="header">Id</th> 
                             <th class="header">Correto</th>
                             <th class="header">Descrição</th>                           
                             <th class="header" id="td-acoes">Ações</th>
@@ -51,9 +53,9 @@
                                     ${ans.description}  
                                 </td>                                                         
                                 <td>
-                                    <button type="button" class="btn btn-primary btn-sm" href="#" onclick="alterar('${ans.id}','${ans.isCorrect()}','${ans.description}')">
-                                        <span class="glyphicon glyphicon-edit"></span></button>
-                                    <button type="button" class="btn btn-danger btn-sm" onclick="window.location.href='actions/DeleteAnswer/${ans.id}'"><span class="glyphicon glyphicon-trash"></span></button>
+                                    <a  class="btn btn-primary btn-sm" href="#" onclick="alterar('${ans.id}','${ans.isCorrect()}','${ans.description}')">
+                                        <span class="glyphicon glyphicon-edit"></span></a>
+                                    <a class="btn btn-danger btn-sm" onclick="href='actions/DeleteAnswer/${ans.id}'"><span class="glyphicon glyphicon-trash"></span></a>
                                 </td>
                             </tr>
                         </c:forEach>

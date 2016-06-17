@@ -32,18 +32,15 @@ public class AnswerController {
             
 
                 lista = new AnswerService().listAnswers();
-                lista = new AnswerService().listAnswers();
-                lista = new AnswerService().listAnswers();
 		ModelAndView mv = new ModelAndView("answer/list");
                 mv.addObject("lista", lista);
-                mv.addObject("answer", new Answer());
 		return mv;
 	}
         
       
         
     @RequestMapping("actions/SaveAnswer")
-    public ModelAndView saveAnswer(Answer answer, HttpServletRequest request) throws Exception {
+    public ModelAndView saveAnswer(Answer answer) throws Exception {
         
        
         
@@ -65,7 +62,7 @@ public class AnswerController {
     
     
     @RequestMapping("actions/DeleteAnswer/{id}")
-    public ModelAndView deleteAnswer(@PathVariable("id") Long id, HttpServletRequest request) throws Exception {
+    public ModelAndView deleteAnswer(@PathVariable("id") Long id) throws Exception {
 
 
         ModelAndView mv = new ModelAndView("redirect:../../answer");
