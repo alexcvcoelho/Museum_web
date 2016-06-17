@@ -24,6 +24,7 @@
                     <a class="list-group-item" href="museum">Museum</a>
                     <a class="list-group-item" href="theme">Theme</a>
                     <a class="list-group-item" href="answer">Answer</a>
+                    <a class="list-group-item" href="museological">Museological</a>
                 </div>
             </div>
         </div>
