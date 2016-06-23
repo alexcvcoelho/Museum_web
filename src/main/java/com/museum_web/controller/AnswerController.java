@@ -27,10 +27,9 @@ public class AnswerController {
     
     
     
-    @RequestMapping("answer")
+    @RequestMapping("/answer")
 	public ModelAndView list() {
             
-
                 lista = new AnswerService().listAnswers();
 		ModelAndView mv = new ModelAndView("answer/list");
                 mv.addObject("lista", lista);
@@ -39,7 +38,7 @@ public class AnswerController {
         
       
         
-    @RequestMapping("actions/SaveAnswer")
+    @RequestMapping("/actions/SaveAnswer")
     public ModelAndView saveAnswer(Answer answer) throws Exception {
         
        

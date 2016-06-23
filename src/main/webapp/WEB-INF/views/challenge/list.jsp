@@ -23,7 +23,7 @@
             <div class="panel">
                 <h3>
                     Challenge 
-                    <a type="button" class="btn btn-success btn-sm" onclick="href='challenge/create'">
+                    <a type="button" class="btn btn-success btn-sm" onclick="href='challengeCreate?id=-1'">
                         <span class="glyphicon glyphicon-plus"></span>
                     </a>
                     <hr>
@@ -49,9 +49,9 @@
                                     ${cha.description}  
                                 </td>                                                         
                                 <td>
-                                    <a  class="btn btn-primary btn-sm" href="#" onclick="alterar('${cha.challengeId}','${cha.description}')">
+                                    <a  class="btn btn-primary btn-sm" href="#" onclick="alterar('${cha.challengeId}')">
                                         <span class="glyphicon glyphicon-edit"></span></a>
-                                    <a type="button" class="btn btn-danger btn-sm" onclick="href='actions/deleteChallenge'"><span class="glyphicon glyphicon-trash"></span></a>
+                                    <a type="button" class="btn btn-danger btn-sm" onclick="href='actions/deleteChallenge?challengeId=${cha.challengeId}' "><span class="glyphicon glyphicon-trash"></span></a>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -69,11 +69,9 @@
     <script src="resources/js/jquery.tablesorter.pager.js"></script>
     <script src="resources/js/bootstrap.js"></script>
     <script type="text/javascript">    
-        function alterar(id, description) 
+        function alterar(id) 
         {
-            $(challenge.challengeId) = id;
-            $(challenge.description) = description;
-            window.location.href='actions/DeleteAnswer/${ans.id}'
+            window.location.href='challengeCreate?id='+id;
         };
         
     </script>

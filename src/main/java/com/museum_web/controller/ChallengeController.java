@@ -7,11 +7,15 @@ package com.museum_web.controller;
 
 
 
+import com.lpsmuseum.dto.scenario.Answer;
 import com.lpsmuseum.dto.scenario.Challenge;
+import com.lpsmuseum.service.AnswerService;
 import com.lpsmuseum.service.ChallengeService;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,39 +28,115 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class ChallengeController {
     
-    List<Challenge> lista = new ArrayList<Challenge>();    
+      
+    static Challenge c = new Challenge();
+    ChallengeService cs = new ChallengeService();
     
     @RequestMapping("/challenge")
 	public ModelAndView list() {
-            
-            lista = new ChallengeService().listChallenges();
+            List<Challenge> lista = new ChallengeService().listChallenges();
             ModelAndView mv = new ModelAndView("challenge/list");
             mv.addObject("lista", lista);
-            mv.addObject("challenge", new Challenge());
             return mv;
             
 	}
     
         
-    @RequestMapping("/challenge/")
-	public ModelAndView create() {
+    @RequestMapping("/challengeCreate")
+	public ModelAndView create(HttpServletRequest request) throws Exception {
             
             
-            ModelAndView mv = new ModelAndView("challenge/create");            
-            mv.addObject("challenge", new Challenge());
+            Long id = Long.parseLong(request.getParameter("id"));
             
+            ModelAndView mv = new ModelAndView("challenge/create");
+            
+            c = new Challenge(); 
+            
+            
+            if ( c.getChallengeId().compareTo(id)!=0)
+            {
+                c = cs.findById(id);
+            }
+            
+            List<Answer> answers = new AnswerService().listAnswers();
+            List<Answer> aux = c.getAnswers();
+            for(int j = 0; j < aux.size();j++)
+            {
+                
+                for(int i = 0; i < answers.size();i++)
+                {
+                    if(aux.get(j).getId().compareTo(answers.get(i).getId())==0)
+                    {
+                        answers.remove(i);
+                        break;
+                    }
+                }
+                
+            }
+                
+            mv.addObject("challenge", c);
+            mv.addObject("allAnswers",answers);
+            
+           
             return mv;
             
 	}
     
-    @RequestMapping("actions/DeleteChallenge/{id}")
-        public ModelAndView delete(@PathVariable("id") Long id, HttpServletRequest request) {
+    @RequestMapping("actions/saveChallenge")
+        public void add(Challenge challenge, HttpServletResponse response) throws Exception {
 
+            c.setDescription(challenge.getDescription());
+            if(c.getChallengeId()<0)
+                c.setChallengeId(null);
+           cs.createChallenge(c);
+           response.sendRedirect("../challengeCreate?id="+c.getChallengeId());
+           
+        }
+        
+        
+    @RequestMapping("actions/deleteChallenge")
+        public void delete(Challenge c, HttpServletResponse response) throws IOException {
 
-            ModelAndView mv = new ModelAndView("challenge/create");
+            cs.deleteChallenge(c.getChallengeId());   
+            response.sendRedirect("../challenge");
 
-            mv.addObject("challenge", new Challenge());
-            return mv;
+        }
+        
+    @RequestMapping("actions/addAnswer/{Answer}")
+        public void addAnswer(@PathVariable("Answer") Long answer , HttpServletRequest request,HttpServletResponse response) throws Exception {
+            
+            List<Answer> aux = c.getAnswers();
+                        
+            Answer a = new AnswerService().findById(answer);
+            
+            aux.add(a);
+            
+            c.setAnswers(aux);
+            
+            new ChallengeService().editChallenge(c);
+            
+            response.sendRedirect("../../challengeCreate?id=" + c.getChallengeId());
+
+        }
+        
+    @RequestMapping("actions/removeAnswer/{Answer}")
+        public void removeAnswer(@PathVariable("Answer") Long answer , HttpServletRequest request,HttpServletResponse response) throws Exception {
+            
+            List<Answer> aux = c.getAnswers();
+            
+            for(Answer x : aux)
+            {
+                if(x.getId().compareTo(answer)==0)
+                {
+                    aux.remove(x);
+                    break;
+                }
+            }
+            c.setAnswers(aux);
+            
+            new ChallengeService().editChallenge(c);
+            
+            response.sendRedirect("../../challengeCreate?id=" + c.getChallengeId());
 
         }
 }
