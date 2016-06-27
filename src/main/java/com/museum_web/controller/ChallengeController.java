@@ -31,12 +31,14 @@ public class ChallengeController {
       
     static Challenge c = new Challenge();
     ChallengeService cs = new ChallengeService();
+    Boolean addError = false;
     
     @RequestMapping("/challenge")
 	public ModelAndView list() {
             List<Challenge> lista = new ChallengeService().listChallenges();
             ModelAndView mv = new ModelAndView("challenge/list");
             mv.addObject("lista", lista);
+            
             return mv;
             
 	}
@@ -53,7 +55,7 @@ public class ChallengeController {
             c = new Challenge(); 
             
             
-            if ( c.getChallengeId().compareTo(id)!=0)
+            if (id > 0 )
             {
                 c = cs.findById(id);
             }
@@ -73,10 +75,15 @@ public class ChallengeController {
                 }
                 
             }
-                
+            
+            
+            
+            
+            mv.addObject("addError", addError );
             mv.addObject("challenge", c);
             mv.addObject("allAnswers",answers);
             
+            addError=false;
            
             return mv;
             
@@ -86,10 +93,10 @@ public class ChallengeController {
         public void add(Challenge challenge, HttpServletResponse response) throws Exception {
 
             c.setDescription(challenge.getDescription());
-            if(c.getChallengeId()<0)
-                c.setChallengeId(null);
-           cs.createChallenge(c);
-           response.sendRedirect("../challengeCreate?id="+c.getChallengeId());
+//            if(c.getChallengeId()<0)
+//                c.setChallengeId(null);
+            cs.createChallenge(c);
+            response.sendRedirect("../challengeCreate?id="+c.getChallengeId());
            
         }
         
@@ -109,11 +116,19 @@ public class ChallengeController {
                         
             Answer a = new AnswerService().findById(answer);
             
-            aux.add(a);
             
-            c.setAnswers(aux);
+            if(a.isCorrect() && c.getCorrectAnswer()!=null)
+                addError = true;
+            else
+            {
+                aux.add(a);
             
-            new ChallengeService().editChallenge(c);
+                c.setAnswers(aux);
+            
+                new ChallengeService().editChallenge(c);
+                
+                addError=false;
+            }
             
             response.sendRedirect("../../challengeCreate?id=" + c.getChallengeId());
 

@@ -30,7 +30,7 @@
                 </h3>
                
                
-                <table class="table tablesorter table-striped sortable table-hover">
+                <table class="table tablesorter table-striped sortable table- table-bordered">
                     <thead>
                         <tr>
                             <th class="header">Id</th> 
@@ -57,11 +57,15 @@
                         </c:forEach>
                     </tbody>
                 </table>
+                <hr>
+                <div class="btn-group" >
+                    <a type="button"  class="btn btn-info " href='home'><span class="glyphicon glyphicon-circle-arrow-left"></span> Voltar</a>              
+                </div>
             </div>
         </div>
                
         <div class="col-lg-1"></div>
-        
+       
         
         
     <script src="resources/js/jquery-min.js"></script>

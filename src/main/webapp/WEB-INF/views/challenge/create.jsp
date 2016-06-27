@@ -24,12 +24,15 @@
             <div class="panel">
                 <h3>
                     Challenge
-                    <a type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalAnswer">
-                        <span class="glyphicon glyphicon-plus"></span>
-                    </a>
+                    
                     <hr>
                 </h3>
                 
+                <c:if test="${addError}">
+                    <div class="alert alert-danger">
+                    <strong>Error!</strong> Challenge pode conter apenas uma answer correta!
+                    </div>
+                </c:if>
                 
                 <form action="actions/saveChallenge" method="POST">
                         
@@ -44,8 +47,8 @@
                         <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-check" ></span> Salvar</button>
                     </div>
                 </form>
-                    <c:set var="desc" value="${'#description'}"/>
-                        <c:if test='${desc!=""}'>
+                    
+                        <c:if test='${not empty challenge.description}'>
                             <div class="form-group-sm">
                                 <table class="table tablesorter table-striped sortable table- table-bordered" style="margin-top: 10px">
                                     <thead>
@@ -71,8 +74,7 @@
                                                     ${ans.description}  
                                                 </td>                                                         
                                                 <td>
-                                                    <a  class="btn btn-primary btn-sm" href="#" onclick="alterar('${ans.id}','${ans.isCorrect()}','${ans.description}')">
-                                                        <span class="glyphicon glyphicon-edit"></span></a>
+                                                   
                                                     <a class="btn btn-danger btn-sm" onclick="href='actions/removeAnswer/${ans.id}'"><span class="glyphicon glyphicon-trash"></span></a>
                                                 </td>
                                             </tr>
@@ -86,7 +88,7 @@
                                 <div class="col-sm-10">
                                     <select  class="span5 form-control col-sm-10" id ="answer" >
                                         <option value="-1">
-                                                selecione;
+                                                Nova Answer;
                                         </option>
                                         <c:forEach var="ans" items="${allAnswers}">
                                             <option value="${ans.id}">
@@ -103,10 +105,11 @@
                                 </div>
                             </div>
                             
-                            <hr>
+                            
                      </c:if>  
+                            <hr>
                             <div class="btn-group">
-                                <a type="button"  class="btn btn-danger " href='challenge'><span class="glyphicon glyphicon-remove"></span> Cancel</a>
+                                <a type="button"  class="btn btn-info " href='challenge'><span class="glyphicon glyphicon-circle-arrow-left"></span> Voltar</a>
                                 
                             </div>
                        
@@ -150,7 +153,10 @@
           
         function addAnswer()
         {
-            window.location.href = "actions/addAnswer/" + a ;
+            if(a == null || a <0 )
+                window.location.href = "answer";
+            else
+                window.location.href = "actions/addAnswer/" + a ;
         }
     
           

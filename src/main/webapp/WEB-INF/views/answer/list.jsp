@@ -61,6 +61,11 @@
                         </c:forEach>
                     </tbody>
                 </table>
+                <hr>
+                 <div class="btn-group">
+                                <a type="button"  class="btn btn-info " href='home'><span class="glyphicon glyphicon-circle-arrow-left"></span> Voltar</a>
+                                
+                            </div>
             </div>
         </div>
                
