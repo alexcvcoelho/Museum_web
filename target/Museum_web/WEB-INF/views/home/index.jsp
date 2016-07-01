@@ -26,6 +26,7 @@
                     <a class="list-group-item" href="answer">Answer</a>
                     <a class="list-group-item" href="museological">Museological</a>
                     <a class="list-group-item" href="scenario">Scenario</a>
+                    <a class="list-group-item" href="challenge">Challenge</a>
                 </div>
             </div>
         </div>
