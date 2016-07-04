@@ -10,6 +10,7 @@ import com.lpsmuseum.service.AnswerService;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,7 +40,7 @@ public class AnswerController {
       
         
     @RequestMapping("/actions/SaveAnswer")
-    public ModelAndView saveAnswer(Answer answer) throws Exception {
+    public void saveAnswer(Answer answer,  HttpServletResponse response) throws Exception {
         
        
         
@@ -54,23 +55,23 @@ public class AnswerController {
             new AnswerService().editAnswer(answer);
         
         
-        ModelAndView mv = new ModelAndView("redirect:../answer");
-        return mv;
+        
+        response.sendRedirect("../Answer");
+        
         
     }
     
     
     @RequestMapping("actions/DeleteAnswer/{id}")
-    public ModelAndView deleteAnswer(@PathVariable("id") Long id) throws Exception {
+    public void deleteAnswer(@PathVariable("id") Long id,  HttpServletResponse response) throws Exception {
 
 
-        ModelAndView mv = new ModelAndView("redirect:../../answer");
         
         new AnswerService().deleteAnswer(id);
         
         
+        response.sendRedirect("../../answer");
         
-        return mv;
 
     }
 }
