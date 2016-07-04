@@ -48,6 +48,24 @@
                             </c:forEach>
                         </select>
                     </div>
+                    <div class="form-group">
+                        <div class="col-lg-6">
+                            <label>Challenges</label>
+                            <ul class="list-group">
+                                <c:forEach items="${challenges}" var="item">
+                                    <label class="list-group-item"><input type="checkbox" name="Challenge" value="${item.getChallengeId()}"/> ${item.getDescription()}</label>
+                                </c:forEach>
+                            </ul>
+                        </div>
+                        <div class="col-lg-6">
+                            <label>Objects</label>
+                            <ul class="list-group">
+                                <c:forEach items="${objects}" var="item">
+                                    <label class="list-group-item"><input type="checkbox" name="Object" value="${item.getId()}"/> ${item.getName()}</label>
+                                </c:forEach>
+                            </ul>
+                        </div>
+                    </div>
                     <button type="submit" class="btn btn-success">Salvar</button>
                 </form>
             </div>
