@@ -40,13 +40,16 @@
                                         <br />
                                     </c:forEach></td>
                                 <td>
-                                    <a href="#" onclick="alterar('${museum.getId()}','${museum.getName()}')" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-edit"></i></a>
+                                    <a href="#" onclick="alterar('${museum.getId()}', '${museum.getName()}')" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-edit"></i></a>
                                     <a href="actions/deleteMuseum?id=${museum.getId()}" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i></a>
                                 </td>
                             </tr>
                         </c:forEach>
                     </tbody>
                 </table>
+                <div class="btn-group" >
+                    <a type="button"  class="btn btn-info " href='home'><span class="glyphicon glyphicon-circle-arrow-left"></span> Voltar</a>              
+                </div>
             </div>
         </div>
         <div class="col-lg-1"></div>
@@ -84,12 +87,12 @@
         <script src="resources/js/jquery.tablesorter.pager.js"></script>
         <script src="resources/js/bootstrap.js"></script>
         <script type="text/javascript">
-            function alterar(id, name)
-            {
-                $('#id').val(id);
-                $('#name').val(name);
-                $('#modalMuseum').modal('show');
-            }
-            ;
+                                        function alterar(id, name)
+                                        {
+                                            $('#id').val(id);
+                                            $('#name').val(name);
+                                            $('#modalMuseum').modal('show');
+                                        }
+                                        ;
         </script>
     </body>

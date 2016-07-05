@@ -20,6 +20,7 @@ import com.lpsmuseum.service.builders.ScenarioBuilder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -34,7 +35,11 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 public class ScenarioController {
+
     public static Scenario sc = new Scenario();
+    public static ArrayList<Challenge> ch = new ArrayList<Challenge>();
+    public static ArrayList<MuseologicalObject> ob = new ArrayList<MuseologicalObject>();
+
     @RequestMapping("/scenario")
     public ModelAndView list() {
         ModelAndView mv = new ModelAndView("scenario/list");
@@ -43,12 +48,14 @@ public class ScenarioController {
         ArrayList<Scenario> scenarios = (ArrayList<Scenario>) new ScenarioService().listScenarios();
         ArrayList<Challenge> challenges = (ArrayList<Challenge>) new ChallengeService().listChallenges();
         ArrayList<MuseologicalObject> objects = (ArrayList<MuseologicalObject>) new MuseologicalObjectService().listObjects();
-        mv.addObject("themes",themes);
-        mv.addObject("museums",museums);
-        mv.addObject("scenarios",scenarios);
-        mv.addObject("challenges",challenges);
-        mv.addObject("objects",objects);
-        mv.addObject("sc",sc);
+        mv.addObject("themes", themes);
+        mv.addObject("museums", museums);
+        mv.addObject("scenarios", scenarios);
+        mv.addObject("challenges", challenges);
+        mv.addObject("objects", objects);
+        mv.addObject("sc", sc);
+        mv.addObject("ch", ch);
+        mv.addObject("ob", ob);
         return mv;
     }
 
@@ -57,15 +64,38 @@ public class ScenarioController {
         ScenarioBuilder sb = new ScenarioBuilder();
         String[] objects = request.getParameterValues("Object");
         String[] challenges = request.getParameterValues("Challenge");
-        
-        for (String c : challenges) {
-            sb.withChallenge(new ChallengeService().findById(Long.parseLong(c)));
+        List<Challenge> chs = new ArrayList<Challenge>();
+        List<MuseologicalObject> obs = new ArrayList<MuseologicalObject>();
+
+        if (objects != null) {
+            for (String c : challenges) {
+                Challenge cha = new ChallengeService().findById(Long.parseLong(c));
+                sb.withChallenge(cha);
+                chs.add(cha);
+
+            }
         }
-        for (String o : objects) {
-             sb.withObject(new MuseologicalObjectService().findById(Long.parseLong(o)));
-        }        
-        sb.withTheme(new ThemeService().findById(Long.parseLong(request.getParameter("idTheme")))).build(scenario.getName(),scenario.getIdMuseum());    
-        
+        if (challenges != null) {
+            for (String o : objects) {
+                MuseologicalObject mus = new MuseologicalObjectService().findById(Long.parseLong(o));
+                sb.withObject(mus);
+                obs.add(mus);
+            }
+        }
+        Theme th = new ThemeService().findById(Long.parseLong(request.getParameter("idTheme")));
+        if (scenario.getId() == null) {
+            sb.withTheme(th).build(scenario.getName(), scenario.getIdMuseum());
+        } else {
+            ScenarioChallenge sc = new ScenarioChallenge();
+            sc.setChallenges(chs);
+            sc.setObjects(obs);
+            sc.setTheme(th);
+            sc.setId(scenario.getId());
+            sc.setName(scenario.getName());
+            sc.setIdMuseum(scenario.getIdMuseum());
+            new ScenarioService().editScenario(sc);
+        }
+
         sc = new Scenario();
         response.sendRedirect("../scenario");
     }
@@ -75,11 +105,17 @@ public class ScenarioController {
         new ScenarioService().deleteScenario(scenario.getId());
         response.sendRedirect("../scenario");
     }
-    
+
     @RequestMapping("actions/editScenario")
     public void edit(Scenario scenario, HttpServletRequest request, HttpServletResponse response) throws Exception {
-        sc = new ScenarioService().findById(scenario.getId());        
+        sc = new ScenarioService().findById(scenario.getId());
         sc.setTheme(new ThemeService().findById(Long.parseLong(request.getParameter("idTheme"))));
+        ob = (ArrayList<MuseologicalObject>) sc.getObjects();
+        if (sc.getClass() == ScenarioChallenge.class) {
+            ScenarioChallenge shc = new ScenarioChallenge();
+            shc = (ScenarioChallenge) sc;
+            ch = (ArrayList<Challenge>) shc.getChallenges();
+        }
         response.sendRedirect("../scenario");
     }
 

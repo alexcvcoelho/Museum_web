@@ -53,6 +53,9 @@
                         </c:forEach>
                     </tbody>
                 </table>
+                <div class="btn-group" >
+                    <a type="button"  class="btn btn-info " href='home'><span class="glyphicon glyphicon-circle-arrow-left"></span> Voltar</a>              
+                </div>
             </div>
         </div>
         <div class="col-lg-1"></div>
@@ -120,10 +123,12 @@
                                     ;
                                     function imagem() {
                                         $('#divtype').html("<input class='form-control' type='text' placeholder='URL' name='urlAddress' />");
-                                    };
+                                    }
+                                    ;
                                     function texto() {
                                         $('#divtype').html("<textarea class='form-control' name='text' placeholder='Texto'></textarea>");
-                                    };
+                                    }
+                                    ;
 
         </script>
 

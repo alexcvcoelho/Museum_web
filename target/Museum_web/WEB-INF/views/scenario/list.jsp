@@ -53,16 +53,16 @@
                             <label>Challenges</label>
                             <ul class="list-group">
                                 <c:forEach items="${challenges}" var="item">
-                                    <label class="list-group-item"><input type="checkbox" name="Challenge" value="${item.getChallengeId()}"/> ${item.getDescription()}</label>
-                                </c:forEach>
+                                    <label class="list-group-item"><input ${Array.binarySearch(ch,item) ? "checked" : ""} type="checkbox" name="Challenge" value="${item.getChallengeId()}"/> ${item.getDescription()}</label>
+                                    </c:forEach>
                             </ul>
                         </div>
                         <div class="col-lg-6">
                             <label>Objects</label>
                             <ul class="list-group">
                                 <c:forEach items="${objects}" var="item">
-                                    <label class="list-group-item"><input type="checkbox" name="Object" value="${item.getId()}"/> ${item.getName()}</label>
-                                </c:forEach>
+                                    <label class="list-group-item"><input ${Array.binarySearch(ob,item) ? "checked" : ""} type="checkbox" name="Object" value="${item.getId()}"/> ${item.getName()}</label>
+                                    </c:forEach>
                             </ul>
                         </div>
                     </div>
@@ -94,7 +94,10 @@
                     </c:forEach>
                 </tbody>
             </table>
-        </div>
+            <div class="btn-group" >
+                <a type="button"  class="btn btn-info " href='home'><span class="glyphicon glyphicon-circle-arrow-left"></span> Voltar</a>              
+            </div>
+        </div>        
     </div>
     <div class="col-lg-1"></div>      
 

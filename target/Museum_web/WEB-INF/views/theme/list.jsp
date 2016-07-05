@@ -43,16 +43,19 @@
                                 <td>
                                     <button type="button" class="btn btn-primary btn-sm"  href="#" onclick="alterar('${theme.id}', '${theme.title}', '${theme.description}');">
                                         <span class="glyphicon glyphicon-edit" ></span></button>
-                                        <button type="button" class="btn btn-danger btn-sm" href="#" onclick="Delete('${theme.id}')"><span class="glyphicon glyphicon-trash"></span></button>
+                                    <button type="button" class="btn btn-danger btn-sm" href="#" onclick="Delete('${theme.id}')"><span class="glyphicon glyphicon-trash"></span></button>
                                 </td>
                             </tr>
                         </c:forEach>
                     </tbody>
                 </table>
+                <div class="btn-group" >
+                    <a type="button"  class="btn btn-info " href='home'><span class="glyphicon glyphicon-circle-arrow-left"></span> Voltar</a>              
+                </div>
             </div>
         </div>
         <div class="col-lg-1"></div>
-        
+
         <!--Start Modal-->
         <div id="modalTheme" class="modal fade in">
             <div class="modal-dialog">
@@ -84,25 +87,26 @@
                 </div>
             </div>
         </div>
-        
-    <script src="resources/js/jquery-min.js"></script>
-    <script src="resources/js/jquery.tablesorter.min.js"></script>
-    <script src="resources/js/jquery.tablesorter.pager.js"></script>
-    <script src="resources/js/bootstrap.js"></script>
-    <script type="text/javascript">    
-    function alterar(id, title, description) 
-    {
-        $('#id').val(id);
-        $('#title').val(title);
-        $('#description').val(description);
-        $('#modalTheme').modal('show');
-    };
-                        
-    function Delete(id)
-    {
-      window.location.href = "actions/deleteTheme?id=" + id;
-    }
-    </script>
-    
+
+        <script src="resources/js/jquery-min.js"></script>
+        <script src="resources/js/jquery.tablesorter.min.js"></script>
+        <script src="resources/js/jquery.tablesorter.pager.js"></script>
+        <script src="resources/js/bootstrap.js"></script>
+        <script type="text/javascript">
+                                        function alterar(id, title, description)
+                                        {
+                                            $('#id').val(id);
+                                            $('#title').val(title);
+                                            $('#description').val(description);
+                                            $('#modalTheme').modal('show');
+                                        }
+                                        ;
+
+                                        function Delete(id)
+                                        {
+                                            window.location.href = "actions/deleteTheme?id=" + id;
+                                        }
+        </script>
+
     </body>
 </html>
