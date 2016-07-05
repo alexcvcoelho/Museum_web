@@ -60,7 +60,6 @@
         </div>
         <div class="col-lg-1"></div>
 
-        <!--Start Modal-->
         <div id="modal" class="modal fade in">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -70,6 +69,7 @@
                             <h4>
                                 <label>Museological</label>
                             </h4>                    
+        <!--Start Modal-->
                         </div>
                         <div class="modal-body">
                             <input type="hidden" name="id" id="id" value="0"/>                           
