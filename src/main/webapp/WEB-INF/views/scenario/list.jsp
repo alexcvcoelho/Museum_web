@@ -53,7 +53,7 @@
                             <label>Challenges</label>
                             <ul class="list-group">
                                 <c:forEach items="${challenges}" var="item">
-                                    <label class="list-group-item"><input ${Array.binarySearch(ch,item) ? "checked" : ""} type="checkbox" name="Challenge" value="${item.getChallengeId()}"/> ${item.getDescription()}</label>
+                                    <label class="list-group-item"><input ${ch.contains(item)} type="checkbox" name="Challenge" value="${item.getChallengeId()}"/> ${item.getDescription()}</label>
                                     </c:forEach>
                             </ul>
                         </div>
@@ -61,7 +61,7 @@
                             <label>Objects</label>
                             <ul class="list-group">
                                 <c:forEach items="${objects}" var="item">
-                                    <label class="list-group-item"><input ${Array.binarySearch(ob,item) ? "checked" : ""} type="checkbox" name="Object" value="${item.getId()}"/> ${item.getName()}</label>
+                                    <label class="list-group-item"><input ${ob.contains(item) ? "checked" : ""} type="checkbox" name="Object" value="${item.getId()}"/> ${item.getName()}</label>
                                     </c:forEach>
                             </ul>
                         </div>
