@@ -36,7 +36,7 @@
                 
                 <form action="actions/saveChallenge" method="POST">
                         
-                    <input type="hidden" name="id" id="id" value="${challenge.getChallengeId()}" />
+                    <input type="hidden" name="id" id="id" value="${challenge.challengeId}" />
 
                     <label>Descrição</label>
                     <div class="form-group-sm">

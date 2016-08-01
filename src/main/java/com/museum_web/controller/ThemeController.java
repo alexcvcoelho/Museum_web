@@ -6,6 +6,7 @@ import com.lpsmuseum.service.ThemeService;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,8 +46,7 @@ public class ThemeController {
     }
         
     @RequestMapping("actions/SaveTheme")
-    public ModelAndView saveTheme(Theme theme, HttpServletRequest request) throws Exception {
-        ModelAndView mv = new ModelAndView("theme/list");
+    public void saveTheme(Theme theme, HttpServletRequest request, HttpServletResponse response) throws Exception {
         if(theme.getId()==0){
             theme.setId(null);
             new ThemeService().createTheme(theme);
@@ -54,14 +54,13 @@ public class ThemeController {
         else{
             new ThemeService().editTheme(theme);
         }         
-        return mv;
+        response.sendRedirect("../theme");
     }
     
     @RequestMapping("actions/deleteTheme")
-    public ModelAndView deleteTheme(Theme theme) throws Exception{
-        ModelAndView mv = new ModelAndView("theme/list");
+    public void deleteTheme(Theme theme,HttpServletRequest request, HttpServletResponse response) throws Exception{
         new ThemeService().deleteTheme(theme);
-        return mv;
+        response.sendRedirect("../theme");
     }
     
     

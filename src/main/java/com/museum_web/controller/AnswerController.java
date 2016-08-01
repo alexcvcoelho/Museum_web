@@ -56,7 +56,7 @@ public class AnswerController {
         
         
         
-        response.sendRedirect("../Answer");
+        response.sendRedirect("../answer");
         
         
     }
